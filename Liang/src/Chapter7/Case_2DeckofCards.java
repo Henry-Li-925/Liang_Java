@@ -8,11 +8,11 @@ public class Case_2DeckofCards {
 
         // initiate the deck
         for(int i = 0; i < deck.length; i++){
-            deck[i] = i+1;
+            deck[i] = i;
         }
 
         // reshuffle the deck
-        for(int i = 0; i < deck.length - 1; i++){
+        for(int i = 0; i < deck.length; i++){
             int temp = deck[i];
             int j = (int)(Math.random() * deck.length);
             deck[i] = deck[j];
@@ -25,6 +25,7 @@ public class Case_2DeckofCards {
         int pick = sc.nextInt();
         int randPick = 0;
 
+        // generate a random number as an index
         if(pick == 1){
             randPick = (int)(Math.random() * deck.length);
         } else {
@@ -32,21 +33,22 @@ public class Case_2DeckofCards {
             System.exit(1);
         }
 
-        int n = deck[randPick-1];
+        // retrive the number by the index
+        int n = deck[randPick];
 
+        // construct the array representing the suit and rank
         String[] cardSuit = {"Spade", "Heart", "Diamond", "Club"};
-        String[] rankSuit = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+        String[] cardRank = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 
-        int suit = Math.ceilDiv(n, 13);
-        int rank = 0;
-        if (n % 13 == 0){
-            rank = 13;
-        } else{
-            rank = n%13;
+
+        System.out.println("Display the first 4 cards of the shuffled deck:");
+        for(int i = 0; i < 4; i++){
+            int t = deck[i];
+            System.out.printf("card %d: %s of %s.\n", t+1, cardRank[t%13], cardSuit[t/13]);
         }
 
+        System.out.printf("The card you pick is %s of %s.\n", cardRank[n%13], cardSuit[n/13]);
 
-        System.out.printf("The card you pick is %s of %s.\n", rankSuit[rank-1], cardSuit[suit-1]);
 
         sc.close();
     }
